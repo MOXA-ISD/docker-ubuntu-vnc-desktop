@@ -146,7 +146,7 @@ export default {
         let url = 'static/vnc.html?'
         url += 'autoconnect=1&'
         url += `host=${hostname}&port=${port}&`
-        url += `path=websockify&title=novnc2&`
+        url += `path=/apps/linuxdesktop/websockify&title=novnc2&`
         url += `logging=warn`
         this.$refs.vncFrame.setAttribute('src', url)
       }
