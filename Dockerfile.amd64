@@ -48,6 +48,10 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/* /tmp/a.txt /tmp/b.txt
 
+# tdk
+ADD http://repo.moxa.online/static/v3/edge/builds/appman-go/16/tdk-amd64 /usr/local/bin/tdk
+RUN chmod +x /usr/local/bin/tdk
+
 
 ################################################################################
 # builder
