@@ -62,6 +62,14 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/* /tmp/a.txt /tmp/b.txt
 
+# docker
+RUN apt-get update \
+    && apt-get install -y iptables \
+    && apt-get clean -y \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apt/*
+
 # tdk
 ADD http://repo.moxa.online/static/v3/edge/builds/appman-go/16/tdk-armhf /usr/local/bin/tdk
 RUN chmod +x /usr/local/bin/tdk
@@ -95,6 +103,8 @@ RUN cd /src/web \
     && npm run build
 
 
+FROM arm32v6/docker:18.06.0-ce-dind as docker
+
 ################################################################################
 # merge
 ################################################################################
@@ -102,6 +112,7 @@ FROM system
 LABEL maintainer="fcwu.tw@gmail.com"
 
 COPY --from=builder /src/web/dist/ /usr/local/lib/web/frontend/
+COPY --from=docker /usr/local/bin/* /usr/local/bin/
 COPY image /
 
 EXPOSE 80
