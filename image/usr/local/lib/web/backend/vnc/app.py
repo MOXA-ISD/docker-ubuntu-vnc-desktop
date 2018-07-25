@@ -46,9 +46,11 @@ def apihealth():
 @app.route('/api/reset')
 def reset():
     if 'w' in request.args and 'h' in request.args:
+        w = int(request.args.get('w'))
+        h = int(request.args.get('h'))
         args = {
-            'w': request.args.get('w'),
-            'h': request.args.get('h'),
+            'w': w - (w % 2),
+            'h': h - (h % 2),
         }
         state.set_size(args['w'], args['h'])
 

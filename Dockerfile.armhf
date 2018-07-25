@@ -96,11 +96,17 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && apt-get update \
     && apt-get install -y yarn
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends patch
+
 # build frontend
 COPY web /src/web
+RUN cd /src/web && ls && patch -p0 < armhf-image-shadow.patch
 RUN cd /src/web \
     && yarn \
     && npm run build
+
+
 
 
 FROM arm32v6/docker:18.06.0-ce-dind as docker
