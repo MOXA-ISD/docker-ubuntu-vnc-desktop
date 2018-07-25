@@ -1,0 +1,18 @@
+--- static/novnc/core/rfb.js	2018-07-24 21:31:53.078975771 +0800
++++ static/novnc/core/rfb.js	2018-07-25 11:47:22.067081160 +0800
+@@ -1253,6 +1253,7 @@
+         var encs = [];
+ 
+         // In preference order
++        encs.push(encodings.encodingRaw);
+         encs.push(encodings.encodingCopyRect);
+         // Only supported with full depth support
+         if (this._fb_depth == 24) {
+@@ -1261,7 +1262,6 @@
+             encs.push(encodings.encodingHextile);
+             encs.push(encodings.encodingRRE);
+         }
+-        encs.push(encodings.encodingRaw);
+ 
+         // Psuedo-encoding settings
+         encs.push(encodings.pseudoEncodingQualityLevel0 + 6);
